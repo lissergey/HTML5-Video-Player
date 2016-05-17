@@ -6,12 +6,14 @@ window.addEventListener('load', function () {
 
   playButton = document.getElementById('play-button');
   timeField = document.getElementById('time-field');
+  soundButton = document.getElementById('sound-button');
 
   video.load();
   video.addEventListener('canplay', function () {
       playButton.addEventListener('click', playOrPause, false);
       pbarContainer.addEventListener('click', skip, false);
       updatePlayer();
+      soundButton.addEventListener('click', muteOrUnmute,false);
   },false);
 }, false);
 
@@ -55,4 +57,14 @@ function getFormattedTime () {
   if(totalMinutes > 0) totalSeconds -= totalMinutes * 60;
   if(totalSeconds.toString().length === 1) totalSeconds = '0' + totalSeconds;
   return minutes + ':' + seconds + ' / ' + totalMinutes + ':' + totalSeconds;
+}
+
+function muteOrUnmute () {
+  if (!video.muted) {
+    video.muted = true;
+    soundButton.src = 'images/mute.png';
+  } else {
+    video.muted = false;
+    soundButton.src = 'images/sound.png';
+  }
 }
