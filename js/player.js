@@ -9,6 +9,7 @@ window.addEventListener('load', function () {
   soundButton = document.getElementById('sound-button');
   sbarContainer = document.getElementById('sbar-container');
   sbar = document.getElementById('sbar');
+  fullscreenButton = document.getElementById('fullscreen-button');
 
   video.load();
   video.addEventListener('canplay', function () {
@@ -17,6 +18,7 @@ window.addEventListener('load', function () {
       updatePlayer();
       soundButton.addEventListener('click', muteOrUnmute, false);
       sbarContainer.addEventListener('click', changeVolume, false);
+      fullscreenButton.addEventListener('click', fullscreen,false)
   },false);
 }, false);
 
@@ -82,5 +84,17 @@ function changeVolume (ev) {
   sbar.style.width = (mouseX / width) * 100 + '%';
   video.muted = false;
   soundButton.src = 'images/sound.png';
-  sbar.style.display = 'block';  
+  sbar.style.display = 'block';
+}
+
+function fullscreen () {
+  if (video.requestFullscreen) {
+    video.requestFullscreen();
+  } else if (video.webkitRequestFullscreen) {
+    video.webkitRequestFullscreen();
+  } else if (video.mozRequestFullscreen) {
+    video.mozRequestFullscreen();
+  } else if (video.msRequestFullscreen) {
+    video.msRequestFullscreen();
+  }
 }
