@@ -57,7 +57,7 @@ video {
 }
 #sbar {
     height: 100%;
-    width: 0%;
+    width: 100%;
     background-color: rgb(50, 170, 220);
 }
 #fullscreen-button {
