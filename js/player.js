@@ -1,5 +1,8 @@
 window.addEventListener('load', function () {
   video = document.getElementById('video');
+
+  pbar = document.getElementById('pbar');
+
   playButton = document.getElementById('play-button');
 
   video.load();
@@ -12,8 +15,19 @@ function playOrPause () {
   if (video.paused) {
     video.play();
     playButton.src = 'images/pause.png';
+    update = setInterval(updatePlayer, 30);
   } else {
     video.pause();
     playButton.src = 'images/play.png';
+    window.clearInterval(update);
+  }
+}
+
+function updatePlayer () {
+  var percentage = (video.currentTime/video.duration)*100;
+  pbar.style.width = percentage + '%';
+  if (video.ended) {
+    window.clearInterval(update);
+    playButton.src = 'images/replay.png';
   }
 }
